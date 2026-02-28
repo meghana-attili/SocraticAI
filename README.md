@@ -1,6 +1,6 @@
 # SocraticAI
 
-> The AI tutor that never gives you the answer.
+> The AI tutor that adapts to your depth.
 
 ---
 
@@ -29,7 +29,7 @@ Paste an essay, code snippet, or short answer. Choose from built-in rubrics (Ess
 ### Mastery Tracker
 Automatically populated from your Socratic debate sessions. Tracks every concept discussed, calculates your confidence score per topic, and highlights weak areas. No manual input needed — it builds as you learn.
 
-### InsightCanvas
+### Insight Canvas
 An interactive whiteboard for visualizing complex problems. Use the canvas to draw relationships, brainstorm ideas, and receive real-time AI feedback on your thought process. It bridges the gap between abstract concepts and visual understanding.
 
 ### Integrity Mode
@@ -134,5 +134,5 @@ Open [http://localhost:3000](http://localhost:3000)
 ---
 
 ## License
-Copyrights Reserved
+Copyrights Reserved, 
 Built for AMD Slingshot 2026
