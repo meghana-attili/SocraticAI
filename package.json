@@ -4,17 +4,47 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.38.2",
+    "@clerk/themes": "^2.4.55",
+    "@prisma/adapter-pg": "^7.4.1",
+    "@prisma/client": "^7.4.1",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@tailwindcss/postcss": "^4.2.1",
+    "autoprefixer": "^10.4.27",
+    "bcryptjs": "^3.0.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.34.3",
+    "graphology": "^0.26.0",
+    "graphology-layout-forceatlas2": "^0.10.1",
+    "katex": "^0.16.33",
+    "lucide-react": "^0.575.0",
+    "neo4j-driver": "^6.0.1",
     "next": "16.1.6",
+    "next-auth": "^4.24.13",
+    "next-themes": "^0.4.6",
+    "node-cron": "^4.2.1",
+    "pg": "^8.19.0",
+    "postcss": "^8.5.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-pdf": "^10.4.1",
+    "redis": "^5.11.0",
+    "sigma": "^3.0.2",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "25.3.0",
+    "@types/node-cron": "^3.0.11",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6"
+    "eslint-config-next": "16.1.6",
+    "prisma": "^7.4.1"
   }
 }

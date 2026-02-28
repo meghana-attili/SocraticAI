@@ -1,0 +1,127 @@
+@startuml SocraticAI_Architecture
+
+!theme plain
+skinparam backgroundColor #07070f
+skinparam defaultFontColor white
+skinparam defaultFontSize 13
+skinparam defaultFontName "Segoe UI"
+skinparam shadowing false
+skinparam roundCorner 15
+skinparam padding 8
+
+skinparam rectangle {
+  BackgroundColor #141420
+  BorderColor #7c6bff
+  FontColor white
+  FontSize 13
+}
+
+skinparam database {
+  BackgroundColor #1a1025
+  BorderColor #a78bfa
+  FontColor white
+  FontSize 13
+}
+
+skinparam cloud {
+  BackgroundColor #14141f
+  BorderColor #f6a430
+  FontColor white
+  FontSize 14
+}
+
+skinparam package {
+  BackgroundColor #0e0e1c
+  FontColor white
+  FontSize 14
+}
+
+skinparam arrow {
+  Color #555577
+  FontColor #888899
+  FontSize 11
+}
+
+package "Frontend - Next.js 14 App Router, TypeScript" <<Rectangle>> #0e0e1c {
+  rectangle "Collapsible\nSidebar" as Sidebar #141420
+  rectangle "Knowledge Compass\n//Sigma.js v2 WebGL//" as KC #141420
+  rectangle "Socratic Debate\n//Voice + Text Input//" as SD #141420
+  rectangle "Hint System\n//+ Ranking Challenge//" as HS #141420
+  rectangle "Rubric Feedback" as RF #141420
+  rectangle "Master Tracker" as MT #141420
+  rectangle "Integrity Mode" as IM #141420
+  rectangle "NextAuth JWT\nSession" as Auth #141420
+}
+
+package "Ontology Classification Engine" <<Rectangle>> #0e0e1c {
+  rectangle "masteryUpdate\nGateway" as GW #0f1f18
+  rectangle "Tier 1:\nExact Match" as T1 #0f1f18
+  rectangle "Tier 2:\nToken Similarity" as T2 #0f1f18
+  rectangle "Tier 3:\nAsync LLM\nReclassification" as T3 #0f1f18
+  rectangle "Map to Canonical\nConstellation Node" as Canon #0f1f18
+}
+
+package "Backend API Layer - Next.js Route Handlers, Node Runtime" <<Rectangle>> #0e0e1c {
+  rectangle "/api/groq" as ApiGroq #1f1408
+  rectangle "/api/compass\n/generate" as ApiCompass #1f1408
+  rectangle "/api/auth" as ApiAuth #1f1408
+  rectangle "/api/sessions" as ApiSess #1f1408
+  rectangle "/api/graph" as ApiGraph #1f1408
+}
+
+package "Data Layer" <<Rectangle>> #0e0e1c {
+  database "PostgreSQL 16\n+ pgvector\n//Prisma ORM//\n\nUsers, Sessions,\nMastery Records,\nVector Embeddings" as PG
+  database "Neo4j 5.x\n//Neo4j JS Driver//\n\nKnowledge Graph,\nTopic Relationships,\nLearning Paths" as Neo
+  database "Redis 7\n\nSession Cache,\nRate Limiting,\nReal-time State" as Redis
+}
+
+cloud "Groq\nLlama 3 70B" as Groq
+
+' === Frontend connections ===
+Sidebar --> KC
+Sidebar --> SD
+Sidebar --> HS
+Sidebar --> RF
+Sidebar --> MT
+Sidebar --> IM
+
+' === API calls ===
+KC -down-> ApiCompass : User Input
+ApiCompass -down-> Groq : Generate
+Groq -up-> KC : Constellation\nNodes
+
+SD -down-> ApiGroq : Chat /\nVoice Text
+HS -down-> ApiGroq : Questions
+RF -down-> ApiGroq : Submissions
+ApiGroq <-down-> Groq
+
+' === Mastery flow ===
+SD -down-> GW : isCorrect\ntrue/false
+HS -down-> GW : ranking_score\n0-100
+RF -down-> GW : rubric_score\n0-100
+
+GW -down-> T1
+T1 -down-> T2 : fail
+T2 -down-> T3 : fail
+T1 -right-> Canon : success
+T2 -right-> Canon : success
+T3 -right-> Canon : reclassified
+T3 ..> ApiGroq : async
+
+Canon -down-> PG
+
+' === Data layer connections ===
+ApiGraph <-down-> Neo
+KC ..> Neo : graph\ntopology
+Auth <-down-> ApiAuth
+ApiAuth -down-> PG
+ApiSess -down-> PG
+Redis .left.> PG : cache
+
+' === Read flow ===
+PG .up.> MT : confidence\ndata
+PG .up.> KC : node\nprogress
+
+center footer \nDeployment Target: AMD-powered Linux VM (Ubuntu 24.04)\n
+
+@enduml

@@ -1,0 +1,366 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SocraticAI — Use Case Diagram</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fdfdff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #1e2233;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    h1 span {
+      color: #5d4dcc;
+      font-style: italic;
+    }
+
+    .subtitle {
+      color: rgba(30, 34, 51, 0.5);
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+
+    svg {
+      max-width: 1280px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 30px rgba(93, 77, 204, 0.05));
+    }
+
+    .actor-label {
+      font-size: 13px;
+      font-weight: 700;
+      fill: #1e2233;
+      text-anchor: middle;
+    }
+
+    .system-label {
+      font-size: 16px;
+      font-weight: 800;
+      fill: #5d4dcc;
+      text-anchor: middle;
+    }
+
+    .group-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      fill: rgba(30, 34, 51, 0.4);
+      text-anchor: start;
+    }
+
+    .usecase-text {
+      font-size: 11px;
+      fill: #1e2233;
+      text-anchor: middle;
+      dominant-baseline: central;
+      font-weight: 600;
+    }
+
+    .assoc {
+      stroke: rgba(30, 34, 51, 0.2);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .dep {
+      stroke: rgba(30, 34, 51, 0.18);
+      stroke-width: 1.2;
+      stroke-dasharray: 6 4;
+      fill: none;
+    }
+
+    .dep-label {
+      font-size: 9px;
+      fill: rgba(30, 34, 51, 0.4);
+      text-anchor: middle;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .ext-label {
+      font-size: 9px;
+      fill: #059669;
+      text-anchor: middle;
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    .ext {
+      stroke: #10b981;
+      stroke-width: 1.2;
+      stroke-dasharray: 7 4;
+      fill: none;
+      marker-end: url(#arrowGreen);
+    }
+
+    .actor-line {
+      stroke: #454c66;
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .actor-head {
+      fill: #fff;
+      stroke: #454c66;
+      stroke-width: 1.5;
+    }
+
+    .legend-text {
+      font-size: 10px;
+      fill: rgba(30, 34, 51, 0.6);
+      dominant-baseline: central;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Socratic<span>AI</span> — Use Case Diagram</h1>
+  <p class="subtitle">UML Use Case Diagram · Planned Architecture · AMD Slingshot 2026</p>
+
+  <svg viewBox="0 0 1280 960" xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+      <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#10b981" />
+      </marker>
+    </defs>
+
+    <!-- System Boundary -->
+    <rect x="180" y="30" width="860" height="830" rx="24" fill="#ffffff" stroke="#5d4dcc" stroke-width="2"
+      opacity="0.3" />
+    <text x="610" y="62" class="system-label">SocraticAI Platform</text>
+
+    <!-- ==================== LEGEND ==================== -->
+    <g transform="translate(200, 905)">
+      <text x="0" y="0" class="group-label">Legend</text>
+      <line x1="0" y1="20" x2="50" y2="20" stroke="rgba(30, 34, 51, 0.25)" stroke-width="1.5" />
+      <text x="58" y="20" class="legend-text">Association</text>
+      <line x1="180" y1="20" x2="230" y2="20" stroke="rgba(30, 34, 51, 0.18)" stroke-width="1.2"
+        stroke-dasharray="6 4" />
+      <text x="238" y="20" class="legend-text">Dependency (external system)</text>
+      <line x1="480" y1="20" x2="530" y2="20" stroke="#10b981" stroke-width="1.2" stroke-dasharray="7 4"
+        marker-end="url(#arrowGreen)" />
+      <text x="538" y="20" class="legend-text" fill="#059669">«extends»</text>
+    </g>
+
+    <!-- ==================== ACTORS ==================== -->
+
+    <!-- Student (left) -->
+    <circle cx="70" cy="430" r="16" class="actor-head" />
+    <line x1="70" y1="446" x2="70" y2="490" class="actor-line" />
+    <line x1="70" y1="460" x2="45" y2="475" class="actor-line" />
+    <line x1="70" y1="460" x2="95" y2="475" class="actor-line" />
+    <line x1="70" y1="490" x2="50" y2="520" class="actor-line" />
+    <line x1="70" y1="490" x2="90" y2="520" class="actor-line" />
+    <text x="70" y="540" class="actor-label">Student</text>
+
+    <!-- Groq LLM (right) -->
+    <rect x="1100" y="175" width="110" height="46" rx="8" fill="#fffaf2" stroke="#f59e0b" stroke-width="1.5" />
+    <text x="1155" y="202" class="actor-label" font-size="11">Groq LLM</text>
+
+    <!-- MongoDB (right) -->
+    <rect x="1100" y="395" width="110" height="46" rx="8" fill="#f0fff4" stroke="#13aa52" stroke-width="1.5" />
+    <text x="1155" y="422" class="actor-label" font-size="11">MongoDB</text>
+
+    <!-- Neo4j (right) -->
+    <rect x="1100" y="565" width="110" height="46" rx="8" fill="#f0fffb" stroke="#10b981" stroke-width="1.5" />
+    <text x="1155" y="592" class="actor-label" font-size="11">Neo4j</text>
+
+    <!-- Manim (right) -->
+    <rect x="1100" y="720" width="110" height="46" rx="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5" />
+    <text x="1155" y="747" class="actor-label" font-size="11">Manim</text>
+
+
+    <!-- ==================== AUTH GROUP ==================== -->
+    <rect x="200" y="78" width="280" height="80" rx="12" fill="rgba(93, 77, 204, 0.04)" stroke="rgba(93, 77, 204, 0.15)"
+      stroke-width="1" />
+    <text x="216" y="96" class="group-label">Authentication</text>
+    <ellipse cx="280" cy="130" rx="68" ry="22" fill="#fff" stroke="rgba(93, 77, 204, 0.3)" stroke-width="1.5" />
+    <text x="280" y="130" class="usecase-text">Login via NextAuth</text>
+    <ellipse cx="412" cy="130" rx="56" ry="22" fill="#fff" stroke="rgba(93, 77, 204, 0.3)" stroke-width="1.5" />
+    <text x="412" y="130" class="usecase-text">Manage Session</text>
+
+
+    <!-- ==================== KNOWLEDGE COMPASS GROUP ==================== -->
+    <rect x="200" y="175" width="350" height="200" rx="12" fill="rgba(93, 77, 204, 0.04)"
+      stroke="rgba(93, 77, 204, 0.15)" stroke-width="1" />
+    <text x="216" y="196" class="group-label">Knowledge Compass</text>
+    <ellipse cx="305" cy="228" rx="78" ry="22" fill="#fff" stroke="#5d4dcc" stroke-width="1.2" />
+    <text x="305" y="228" class="usecase-text">Enter Subject + Goal</text>
+    <ellipse cx="470" cy="228" rx="78" ry="22" fill="#fff" stroke="#5d4dcc" stroke-width="1.2" />
+    <text x="470" y="228" class="usecase-text">Generate Constellation</text>
+    <ellipse cx="305" cy="280" rx="74" ry="22" fill="#fff" stroke="#5d4dcc" stroke-width="1.2" />
+    <text x="305" y="280" class="usecase-text">Review + Edit Nodes</text>
+    <ellipse cx="470" cy="280" rx="72" ry="22" fill="#fff" stroke="#5d4dcc" stroke-width="1.2" />
+    <text x="470" y="280" class="usecase-text">View Constellation</text>
+    <ellipse cx="375" cy="332" rx="76" ry="22" fill="#fff" stroke="#5d4dcc" stroke-width="1.2" />
+    <text x="375" y="332" class="usecase-text">Track Node Mastery</text>
+
+
+    <!-- ==================== SOCRATIC DEBATE GROUP ==================== -->
+    <rect x="200" y="390" width="350" height="200" rx="12" fill="rgba(16, 185, 129, 0.04)"
+      stroke="rgba(16, 185, 129, 0.15)" stroke-width="1" />
+    <text x="216" y="411" class="group-label">Socratic Debate</text>
+    <ellipse cx="305" cy="445" rx="76" ry="22" fill="#fff" stroke="#10b981" stroke-width="1.2" />
+    <text x="305" y="445" class="usecase-text">Select Debate Topic</text>
+    <ellipse cx="480" cy="445" rx="62" ry="22" fill="#fff" stroke="#10b981" stroke-width="1.2" />
+    <text x="480" y="445" class="usecase-text">Type Argument</text>
+    <ellipse cx="380" cy="497" rx="76" ry="22" fill="#fff" stroke="#10b981" stroke-width="1.2" />
+    <text x="380" y="497" class="usecase-text">Receive AI Challenge</text>
+    <ellipse cx="305" cy="547" rx="80" ry="22" fill="#fff" stroke="#10b981" stroke-width="1.2" />
+    <text x="305" y="547" class="usecase-text">View Debate Summary</text>
+    <ellipse cx="480" cy="547" rx="68" ry="22" fill="#fff" stroke="#10b981" stroke-width="1.2" />
+    <text x="480" y="547" class="usecase-text">Voice Input Mode</text>
+
+
+    <!-- ==================== HINT SYSTEM GROUP ==================== -->
+    <rect x="570" y="175" width="450" height="245" rx="12" fill="rgba(245, 158, 11, 0.04)"
+      stroke="rgba(245, 158, 11, 0.15)" stroke-width="1" />
+    <text x="586" y="196" class="group-label">Hint System</text>
+    <ellipse cx="670" cy="228" rx="68" ry="22" fill="#fff" stroke="#f59e0b" stroke-width="1.2" />
+    <text x="670" y="228" class="usecase-text">Submit Question</text>
+    <ellipse cx="850" cy="228" rx="56" ry="22" fill="#fff" stroke="#f59e0b" stroke-width="1.2" />
+    <text x="850" y="228" class="usecase-text">Upload File</text>
+    <ellipse cx="950" cy="228" rx="56" ry="22" fill="#fff" stroke="#f59e0b" stroke-width="1.2" />
+    <text x="950" y="228" class="usecase-text">Unlock Hints</text>
+    <ellipse cx="720" cy="284" rx="95" ry="22" fill="#fff" stroke="#f59e0b" stroke-width="1.2" />
+    <text x="720" y="284" class="usecase-text">Complete Ranking Challenge</text>
+    <ellipse cx="920" cy="325" rx="72" ry="22" fill="#fff" stroke="#f59e0b" stroke-width="1.2" />
+    <text x="920" y="325" class="usecase-text">View Full Solution</text>
+    <ellipse cx="750" cy="365" rx="88" ry="22" fill="#fff" stroke="#f59e0b" stroke-width="1.2" />
+    <text x="750" y="365" class="usecase-text">Distance-Based Scoring</text>
+
+
+    <!-- ==================== RUBRIC FEEDBACK GROUP ==================== -->
+    <rect x="570" y="430" width="450" height="140" rx="12" fill="rgba(167, 139, 250, 0.04)"
+      stroke="rgba(167, 139, 250, 0.15)" stroke-width="1" />
+    <text x="586" y="451" class="group-label">Rubric Feedback</text>
+    <ellipse cx="670" cy="488" rx="70" ry="22" fill="#fff" stroke="#a78bfa" stroke-width="1.2" />
+    <text x="670" y="488" class="usecase-text">Select Rubric Type</text>
+    <ellipse cx="840" cy="488" rx="56" ry="22" fill="#fff" stroke="#a78bfa" stroke-width="1.2" />
+    <text x="840" y="488" class="usecase-text">Submit Work</text>
+    <ellipse cx="755" cy="540" rx="74" ry="22" fill="#fff" stroke="#a78bfa" stroke-width="1.2" />
+    <text x="755" y="540" class="usecase-text">View Rubric Scores</text>
+
+
+    <!-- ==================== INSIGHTCANVAS GROUP ==================== -->
+    <rect x="200" y="605" width="820" height="110" rx="12" fill="rgba(236, 72, 153, 0.05)"
+      stroke="rgba(236, 72, 153, 0.25)" stroke-width="1.5" />
+    <text x="216" y="625" class="group-label" fill="rgba(236, 72, 153, 0.65)">InsightCanvas — Document
+      Intelligence</text>
+
+    <ellipse cx="290" cy="670" rx="78" ry="22" fill="#fff" stroke="#ec4899" stroke-width="1.2" />
+    <text x="290" y="670" class="usecase-text">Upload Document</text>
+
+    <ellipse cx="480" cy="670" rx="86" ry="22" fill="#fff" stroke="#ec4899" stroke-width="1.2" />
+    <text x="480" y="670" class="usecase-text">Select / Draw Region</text>
+
+    <ellipse cx="670" cy="670" rx="78" ry="22" fill="#fff" stroke="#ec4899" stroke-width="1.2" />
+    <text x="670" y="670" class="usecase-text">Classify + Explain</text>
+
+    <ellipse cx="870" cy="670" rx="88" ry="22" fill="#fff" stroke="#ec4899" stroke-width="1.2" />
+    <text x="870" y="670" class="usecase-text">Render Manim Animation</text>
+
+
+    <!-- ==================== MASTER TRACKER GROUP ==================== -->
+    <rect x="200" y="730" width="820" height="100" rx="12" fill="rgba(30, 34, 51, 0.02)" stroke="rgba(30, 34, 51, 0.08)"
+      stroke-width="1" />
+    <text x="216" y="750" class="group-label">Master Tracker + Integrity Mode</text>
+    <ellipse cx="310" cy="790" rx="82" ry="22" fill="#fff" stroke="rgba(93, 77, 204, 0.4)" stroke-width="1.2" />
+    <text x="310" y="790" class="usecase-text">View Overall Mastery</text>
+    <ellipse cx="520" cy="790" rx="88" ry="22" fill="#fff" stroke="rgba(93, 77, 204, 0.4)" stroke-width="1.2" />
+    <text x="520" y="790" class="usecase-text">View Subject Breakdown</text>
+    <ellipse cx="730" cy="790" rx="82" ry="22" fill="#fff" stroke="rgba(245, 158, 11, 0.4)" stroke-width="1.2" />
+    <text x="730" y="790" class="usecase-text">Switch Integrity Mode</text>
+    <ellipse cx="940" cy="790" rx="72" ry="22" fill="#fff" stroke="rgba(93, 77, 204, 0.4)" stroke-width="1.2" />
+    <text x="940" y="790" class="usecase-text">View Constellation</text>
+
+
+    <!-- ==================== STUDENT ASSOCIATIONS (solid lines) ==================== -->
+
+    <line x1="95" y1="420" x2="212" y2="130" class="assoc" />
+    <line x1="95" y1="422" x2="227" y2="228" class="assoc" />
+    <line x1="95" y1="425" x2="231" y2="280" class="assoc" />
+    <line x1="95" y1="428" x2="299" y2="332" class="assoc" />
+    <line x1="95" y1="432" x2="229" y2="445" class="assoc" />
+    <line x1="95" y1="438" x2="304" y2="497" class="assoc" />
+    <line x1="95" y1="442" x2="225" y2="547" class="assoc" />
+    <line x1="95" y1="425" x2="602" y2="228" class="assoc" />
+    <line x1="95" y1="428" x2="625" y2="284" class="assoc" />
+    <line x1="95" y1="438" x2="600" y2="488" class="assoc" />
+    <line x1="95" y1="442" x2="681" y2="540" class="assoc" />
+    <line x1="95" y1="460" x2="212" y2="670" class="assoc" />
+    <line x1="95" y1="465" x2="394" y2="670" class="assoc" />
+    <line x1="90" y1="520" x2="228" y2="790" class="assoc" />
+    <line x1="90" y1="520" x2="432" y2="790" class="assoc" />
+    <line x1="90" y1="520" x2="648" y2="790" class="assoc" />
+
+
+    <!-- ==================== EXTERNAL SYSTEM DEPENDENCIES (dotted grey, no arrows) ==================== -->
+
+    <!-- Single line from each group to its external system -->
+
+    <!-- Groq LLM: one line from right edge of system boundary -->
+    <line x1="1040" y1="198" x2="1100" y2="198" class="dep" />
+    <text x="1070" y="190" class="dep-label">«uses»</text>
+
+    <!-- MongoDB: one line from right edge -->
+    <line x1="1040" y1="418" x2="1100" y2="418" class="dep" />
+    <text x="1070" y="410" class="dep-label">«persists»</text>
+
+    <!-- Neo4j: one line from right edge -->
+    <line x1="1040" y1="588" x2="1100" y2="588" class="dep" />
+    <text x="1070" y="580" class="dep-label">«graph»</text>
+
+    <!-- Manim: one line from right edge -->
+    <line x1="1040" y1="743" x2="1100" y2="743" class="dep" />
+    <text x="1070" y="735" class="dep-label">«renders»</text>
+
+
+    <!-- ==================== «extends» RELATIONSHIPS ==================== -->
+
+    <!-- Voice Input Mode extends Type Argument -->
+    <path d="M 450 535 Q 468 510 470 467" class="ext" />
+    <text x="488" y="510" class="ext-label">«extends»</text>
+
+    <!-- Upload File extends Submit Question -->
+    <path d="M 794 228 Q 765 222 738 228" class="ext" />
+    <text x="768" y="215" class="ext-label">«extends»</text>
+
+    <!-- View Full Solution extends Complete Ranking Challenge -->
+    <path d="M 870 313 Q 830 300 815 296" class="ext" />
+    <text x="880" y="300" class="ext-label">«extends»</text>
+
+    <!-- View Constellation extends View Subject Breakdown -->
+    <path d="M 868 790 Q 750 770 608 790" class="ext" />
+    <text x="740" y="770" class="ext-label">«extends»</text>
+
+  </svg>
+
+</body>
+
+</html>
+```

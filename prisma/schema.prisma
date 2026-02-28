@@ -1,0 +1,79 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model User {
+  id                    String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  clerk_id              String    @unique
+  email                 String    @unique
+  name                  String?
+  memory_decay_constant Float     @default(0.12)
+  created_at            DateTime  @default(now())
+  updated_at            DateTime  @updatedAt
+  subjects              Subject[]
+  sessions              Session[]
+
+  @@map("users")
+}
+
+model Subject {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String   @db.Uuid
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  name       String
+  exam_date  DateTime?
+  created_at DateTime @default(now())
+  topics     Topic[]
+
+  @@map("subjects")
+}
+
+model Topic {
+  id               String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subject_id       String      @db.Uuid
+  subject          Subject     @relation(fields: [subject_id], references: [id], onDelete: Cascade)
+  title            String
+  base_exam_weight Float       @default(0.5)
+  user_priority    Float       @default(0.5)
+  created_at       DateTime    @default(now())
+  metric           TopicMetric?
+  sessions         Session[]
+
+  @@map("topics")
+}
+
+model TopicMetric {
+  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  topic_id            String   @unique @db.Uuid
+  topic               Topic    @relation(fields: [topic_id], references: [id], onDelete: Cascade)
+  mastery_score       Float    @default(0)
+  forgetting_risk     Float    @default(0)
+  dependency_weakness Float    @default(0)
+  priority_score      Float    @default(0)
+  last_revised        DateTime?
+  correct_attempts    Int      @default(0)
+  total_attempts      Int      @default(0)
+  updated_at          DateTime @updatedAt
+
+  @@map("topic_metrics")
+}
+
+model Session {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id          String   @db.Uuid
+  topic_id         String   @db.Uuid
+  session_type     String
+  score            Float?
+  duration_seconds Int?
+  created_at       DateTime @default(now())
+
+  user             User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  topic            Topic    @relation(fields: [topic_id], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}

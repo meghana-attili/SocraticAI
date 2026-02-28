@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  postgres-pgvector:
+    image: ankane/pgvector:v0.5.1
+    environment:
+      POSTGRES_USER: socratic
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: socratic_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  neo4j:
+    image: neo4j:5.26.0
+    environment:
+      NEO4J_AUTH: neo4j/testing1234
+    ports:
+      - "7474:7474" # Browser
+      - "7687:7687" # Bolt protocol
+    volumes:
+      - neo4j_data:/data
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  neo4j_data:
+  redis_data:
