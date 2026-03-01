@@ -134,5 +134,5 @@ Open [http://localhost:3000](http://localhost:3000)
 ---
 
 ## License
-Copyrights Reserved, 
-Built for AMD Slingshot 2026
+Copyrights Reserved
+- Built for AMD Slingshot 2026
